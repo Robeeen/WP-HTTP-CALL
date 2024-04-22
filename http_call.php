@@ -19,31 +19,31 @@ function call_the_api(){
     $url = "https://fakestoreapi.com/products";
     $argument = array(
         'method' => 'GET',
-        'timeout' => 120
+		'timeout' => 120
     );
-    $response = wp_remote_get(esc_url_raw($url, $argument));
-    if(is_wp_error($response)){
+    $response = wp_remote_get(esc_url_raw($url), $argument);
+    if(is_wp_error($url)){
         echo 'An internal error has occured';
+        return;
+    } 
+    $code = wp_remote_retrieve_response_code($response);
+    if( 200 !== $code){
+        echo 'An https error has occured';
+		echo $response->get_error_message();
         return;
     }
     //parsed from json objects
     $data = json_decode(wp_remote_retrieve_body($response), true);
-
-    $code = wp_remote_retrieve_response_code($data);
-
-    if( 200 !== wp_remote_retrieve_response_code($code)){
-        echo 'An https error has occured';
-        return;
-    }
-
     echo '<div>';
     foreach($data as $product){
         echo '<h3>' . $product->title . '</h3>';
         echo '<p>' . $product->price . '</p>';
     }
     echo '</div>';
- 	
-}
+	// echo '<pre>';
+	// print_r($data);
+	// echo '<pre>';
+ }
 add_shortcode('http-call', 'call_the_api');
 
 
