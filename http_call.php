@@ -8,6 +8,11 @@ Version: 1.0.0
 Author URI: https://shamskhan.xyz
 */
 
+//Define wp-config.php 
+//define( 'WP_DEBUG', true );
+//define( 'WP_DEBUG_DISPLAY', false);
+//define( 'WP_DEBUG_LOG', '/home3/karatekid/test.lismorekarate.com/logs/debug.' . 'date(Y-m-d)' . '.log' );
+
 // Exit if accessed directly
 if( !defined('ABSPATH'))
 {
@@ -40,6 +45,7 @@ function call_the_api(){
         echo '<b>' . $product['title'] . '</b>';
         echo '<p>' . $product['price'] . '</p>';
     }
+    echo '</div>';
 
  }
 add_shortcode('http-call', 'call_the_api');
