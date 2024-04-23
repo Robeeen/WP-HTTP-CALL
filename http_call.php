@@ -22,14 +22,15 @@ function call_the_api(){
 		'timeout' => 120
     );
     $response = wp_remote_get(esc_url_raw($url), $argument);
+	error_log($response, true);
     if(is_wp_error($url)){
         echo 'An internal error has occured';
+		echo $response->get_error_message();
         return;
     } 
     $code = wp_remote_retrieve_response_code($response);
     if( 200 !== $code){
-        echo 'An https error has occured';
-		echo $response->get_error_message();
+        echo 'An https error has occured';		
         return;
     }
     //parsed from json objects
@@ -39,10 +40,7 @@ function call_the_api(){
         echo '<b>' . $product['title'] . '</b>';
         echo '<p>' . $product['price'] . '</p>';
     }
-    echo '</div>';
-	// echo '<pre>';
-	// print_r($data);
-	// echo '<pre>';
+
  }
 add_shortcode('http-call', 'call_the_api');
 
