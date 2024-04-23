@@ -36,8 +36,8 @@ function call_the_api(){
     $data = json_decode(wp_remote_retrieve_body($response), true);
     echo '<div>';
     foreach($data as $product){
-        echo '<h3>' . $product->title . '</h3>';
-        echo '<p>' . $product->price . '</p>';
+        echo '<h3>' . $product['title'] . '</h3>';
+        echo '<p>' . $product['price'] . '</p>';
     }
     echo '</div>';
 	// echo '<pre>';
