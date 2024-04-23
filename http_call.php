@@ -18,6 +18,7 @@ if( !defined('ABSPATH'))
 {
     exit; 
 }
+register_activation_hook( __FILE__, 'call_the_api');
 
 function call_the_api(){
     //calling the api
